@@ -48,4 +48,12 @@ if __name__ == "__main__":
         resizable=True,
         min_size=(600, 500)
     )
-    webview.start()
+    
+    # A safe fallback path pointing to: C:\Users\<Username>\AppData\Roaming\Pitwall
+    appdata_path = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')), 'Pitwall')
+
+    # Start the application with absolute persistence enabled
+    webview.start(
+        private_mode=False,
+        storage_path=appdata_path
+    )
